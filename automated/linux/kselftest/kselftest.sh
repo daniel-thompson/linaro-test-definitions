@@ -1,6 +1,8 @@
 #!/bin/sh
 # Linux kernel self test
 
+set -x
+
 # shellcheck disable=SC1091
 . ../../lib/sh-test-lib
 OUTPUT="$(pwd)/output"
@@ -215,6 +217,8 @@ elif [ -n "${TST_CMDFILES}" ]; then
             continue
         fi
         cp shardfile kselftest-list.txt
+        find .
+        ./timers/posix_timers
         ./run_kselftest.sh -c ${test} 2>&1 | tee -a "${LOGFILE}"
     done
     cp kselftest-list.txt.original kselftest-list.txt
